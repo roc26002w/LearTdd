@@ -49,12 +49,38 @@ class AnyCollection extends sourceCollection
     public function cost()
     {
 
-        return [6, 15, 24, 21];
+        return $this->getReslut('cost',3);
     }
 
     public function revenue()
     {
-        return [50,66,60];
+        return $this->getReslut('revenue',4);
+    }
+
+    private function getResource()
+    {
+        $resource = [
+            "cost" => [1,2,3,4,5,6,7,8,9,10,11],
+            "revenue" => [11,12,13,14,15,16,17,18,19,20,21],
+            "sellprice" => [21,22,23,24,25,26,27,28,29,30,31],
+        ];
+
+        return $resource;
+    }
+
+
+    private function getReslut($option,$sumNum)
+    {
+        $resultData     =   [];
+        $resource   =   $this->getResource();
+        if(is_array($resource)){
+            $catResource = array_chunk($resource[$option], $sumNum);
+            foreach($catResource as $key => $value){
+
+                    array_push($resultData,array_sum($value));
+            }
+        }
+        return $resultData;
     }
 }
 
