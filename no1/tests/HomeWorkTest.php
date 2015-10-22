@@ -1,4 +1,5 @@
 <?php
+use No1\lib\sourceCollection;
 
 /**
  * Created by PhpStorm.
@@ -42,7 +43,7 @@ class HomeWorkTest extends PHPUnit_Framework_TestCase
     }
 }
 
-class AnyCollection
+class AnyCollection extends sourceCollection
 {
 
     public function cost()
