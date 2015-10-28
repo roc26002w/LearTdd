@@ -21,17 +21,27 @@ class BooksDiscountCalculator
         foreach ($this->books as $book) {
             $this->total += $book->getPrice();
         }
-        if(2 === count($this->books)){
-            $this->total = $this->total * 0.95;
-        }
-        if(3 === count($this->books)){
-            $this->total = $this->total * 0.9;
-        }
+        $this->getBookDiscount();
 
     }
 
     public function getTotal()
     {
         return $this->total;
+    }
+
+    protected function getBookDiscount()
+    {
+        switch(count($this->books)){
+            case 2:
+                $this->total = $this->total * 0.95;
+                break;
+            case 3:
+                $this->total = $this->total * 0.9;
+                break;
+            case 4:
+                $this->total = $this->total * 0.8;
+                break;
+        }
     }
 }
