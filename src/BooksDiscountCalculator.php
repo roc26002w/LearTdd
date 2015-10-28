@@ -21,6 +21,9 @@ class BooksDiscountCalculator
         foreach ($this->books as $book) {
             $this->total += $book->getPrice();
         }
+        if(2 === count($this->books)){
+            $this->total = $this->total * 0.95;
+        }
 
     }
 
