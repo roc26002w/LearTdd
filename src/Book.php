@@ -23,7 +23,7 @@ class Book
         $this->count = $count;
     }
 
-    
+
 
     /**
      * @return array

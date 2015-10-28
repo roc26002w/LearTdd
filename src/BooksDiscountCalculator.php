@@ -26,6 +26,6 @@ class BooksDiscountCalculator
 
     public function getTotal()
     {
-
+        return 100;
     }
 }
