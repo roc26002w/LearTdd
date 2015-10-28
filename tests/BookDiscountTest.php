@@ -72,4 +72,25 @@ class BooksDiscountTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($except,$act);
     }
 
+    /**
+     *一二三四集各買了一本，價格應為100*4*0.8=320
+     */
+    public function test_Buy_Four_Book_Get_320()
+    {
+        //Arrange
+        $except = 320;
+
+        //Act
+        $this->booksDiscountCalculator->addBook(new Book('Harry Potter1',1));
+        $this->booksDiscountCalculator->addBook(new Book('Harry Potter2',1));
+        $this->booksDiscountCalculator->addBook(new Book('Harry Potter3',1));
+        $this->booksDiscountCalculator->addBook(new Book('Harry Potter4',1));
+        $this->booksDiscountCalculator->calculator();
+        $act    =   $this->booksDiscountCalculator->getTotal();
+
+        //Assert
+        $this->assertEquals($except,$act);
+
+    }
+
 }
