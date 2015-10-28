@@ -7,25 +7,25 @@ namespace No2;
 class BooksDiscountCalculator
 {
 
-    /**
-     * BooksDiscountCalculator constructor.
-     */
-    public function __construct()
-    {
-    }
+    protected $books;
+    protected $total;
 
     public function addBook(Book $book)
     {
-        
+        $this->books[]    =   $book;
     }
 
     public function calculator()
     {
+        $this->total = 0;
+        foreach ($this->books as $book) {
+            $this->total += $book->getPrice();
+        }
 
     }
 
     public function getTotal()
     {
-        return 100;
+        return $this->total;
     }
 }

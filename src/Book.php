@@ -23,6 +23,28 @@ class Book
         $this->count = $count;
     }
 
+    public function getPrice()
+    {
+        $this->price    =   0;
+        $discountBooks = $this->discountBooks();
+        if(array_key_exists($this->name,$discountBooks)){
+            $this->price = $discountBooks[$this->name];
+        }
+
+        return $this->price;
+    }
+
+    public function getTitle()
+    {
+
+        return $this->name;
+    }
+
+    public function getCount()
+    {
+
+        return $this->count;
+    }
 
 
     /**
