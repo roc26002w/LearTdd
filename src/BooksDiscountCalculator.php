@@ -42,6 +42,9 @@ class BooksDiscountCalculator
             case 4:
                 $this->total = $this->total * 0.8;
                 break;
+            case 5:
+                $this->total = $this->total * 0.75;
+                break;
         }
     }
 }
