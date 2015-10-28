@@ -135,4 +135,47 @@ class BooksDiscountTest extends PHPUnit_Framework_TestCase
 
     }
 
+    /**
+     *第一集買了一本，第二三集各買了兩本，價格應為100*3*0.9 + 100*2*0.95 = 460
+     */
+    public function test_Buy_v1Book_one_v2Book_two_v3Book_two_Get_460()
+    {
+        //Arrange
+        $except = 460;
+
+        //Act
+        $this->booksDiscountCalculator->addBook(new Book('Harry Potter1',1));
+        $this->booksDiscountCalculator->addBook(new Book('Harry Potter2',2));
+        $this->booksDiscountCalculator->addBook(new Book('Harry Potter3',2));
+        $this->booksDiscountCalculator->calculator();
+        $act    =   $this->booksDiscountCalculator->getTotal();
+
+        //Assert
+        $this->assertEquals($except,$act);
+
+    }
+
+    /**
+     * 加碼
+     * 第一集買了1本，第二三集各買了3本，第45集各買1本，價格應為100*5*0.75 + 100*2*0.95 + 100*2*0.95 = 755
+     */
+    public function test_Buy_v1Book_one_v2Book_three_v3Book_three_v4Book_one_v5Book_one_Get_460()
+    {
+        //Arrange
+        $except = 755;
+
+        //Act
+        $this->booksDiscountCalculator->addBook(new Book('Harry Potter1',1));
+        $this->booksDiscountCalculator->addBook(new Book('Harry Potter2',3));
+        $this->booksDiscountCalculator->addBook(new Book('Harry Potter3',3));
+        $this->booksDiscountCalculator->addBook(new Book('Harry Potter4',1));
+        $this->booksDiscountCalculator->addBook(new Book('Harry Potter5',1));
+        $this->booksDiscountCalculator->calculator();
+        $act    =   $this->booksDiscountCalculator->getTotal();
+
+        //Assert
+        $this->assertEquals($except,$act);
+
+    }
+
 }
