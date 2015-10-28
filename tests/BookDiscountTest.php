@@ -115,4 +115,24 @@ class BooksDiscountTest extends PHPUnit_Framework_TestCase
         
     }
 
+    /**
+     *一二集各買了一本，第三集買了兩本，價格應為100*3*0.9 + 100 = 370
+     */
+    public function test_Buy_v1Book_one_v2Book_one_v3Book_three_Get_370()
+    {
+        //Arrange
+        $except = 370;
+
+        //Act
+        $this->booksDiscountCalculator->addBook(new Book('Harry Potter1',1));
+        $this->booksDiscountCalculator->addBook(new Book('Harry Potter2',1));
+        $this->booksDiscountCalculator->addBook(new Book('Harry Potter3',2));
+        $this->booksDiscountCalculator->calculator();
+        $act    =   $this->booksDiscountCalculator->getTotal();
+
+        //Assert
+        $this->assertEquals($except,$act);
+
+    }
+
 }
