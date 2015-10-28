@@ -24,6 +24,9 @@ class BooksDiscountCalculator
         if(2 === count($this->books)){
             $this->total = $this->total * 0.95;
         }
+        if(3 === count($this->books)){
+            $this->total = $this->total * 0.9;
+        }
 
     }
 
