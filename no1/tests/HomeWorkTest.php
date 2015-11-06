@@ -16,21 +16,8 @@ class HomeWorkTest extends PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->product = [
-          ['cost' => 1, 'revenue'=>11 , 'sellPrice' => 21],
-          ['cost' => 2, 'revenue'=>12 , 'sellPrice' => 22],
-          ['cost' => 3, 'revenue'=>13 , 'sellPrice' => 23],
-          ['cost' => 4, 'revenue'=>14 , 'sellPrice' => 24],
-          ['cost' => 5, 'revenue'=>15 , 'sellPrice' => 25],
-          ['cost' => 6, 'revenue'=>16 , 'sellPrice' => 26],
-          ['cost' => 7, 'revenue'=>17 , 'sellPrice' => 27],
-          ['cost' => 8, 'revenue'=>18 , 'sellPrice' => 28],
-          ['cost' => 9, 'revenue'=>19 , 'sellPrice' => 29],
-          ['cost' => 10, 'revenue'=>20 , 'sellPrice' => 30],
-          ['cost' => 11, 'revenue'=>21 , 'sellPrice' => 31],
-        ];
 
-        $this->anyCollection = $this->getMockBuilder('AnyCollection')->getMock();
+        $this->anyCollection = new AnyCollection();
     }
 
     /**
@@ -44,9 +31,8 @@ class HomeWorkTest extends PHPUnit_Framework_TestCase
 
         //Act
         $cost =  $this->anyCollection;
-        $cost->method('getPropertySumGroup')->willReturn($expect);
 
-        $act  = $cost->getPropertySumGroup($this->product,'cost',3);
+        $act  = $cost->getGroup('cost')->getchunk('3')->getSum();
 
         //Assert
         $this->assertEquals($expect, $act);
@@ -54,6 +40,7 @@ class HomeWorkTest extends PHPUnit_Framework_TestCase
 
     /**
      * @group Test
+     * @mixin AnyCollection
      */
     public function test_revenue_sum()
     {
@@ -63,9 +50,8 @@ class HomeWorkTest extends PHPUnit_Framework_TestCase
 
         //Act
         $cost =  $this->anyCollection;
-        $cost->method('getPropertySumGroup')->willReturn($expect);
 
-        $act  = $cost->getPropertySumGroup($this->product,'revenue',4);
+        $act   = $cost->getGroup('revenue')->getchunk('4')->getSum();
 
         //Assert
         $this->assertEquals($expect, $act);
@@ -82,9 +68,60 @@ class HomeWorkTest extends PHPUnit_Framework_TestCase
 class AnyCollection
 {
 
-    public function getPropertySumGroup($product,$group,$sumNum)
+    protected $sortProduct;
+    protected $chunkProduct;
+    protected $sumProduct;
+
+    /**
+     * AnyCollection constructor.
+     */
+    public function __construct()
     {
 
+        $this->products = [
+            ['cost' => 1, 'revenue'=>11 , 'sellPrice' => 21],
+            ['cost' => 2, 'revenue'=>12 , 'sellPrice' => 22],
+            ['cost' => 3, 'revenue'=>13 , 'sellPrice' => 23],
+            ['cost' => 4, 'revenue'=>14 , 'sellPrice' => 24],
+            ['cost' => 5, 'revenue'=>15 , 'sellPrice' => 25],
+            ['cost' => 6, 'revenue'=>16 , 'sellPrice' => 26],
+            ['cost' => 7, 'revenue'=>17 , 'sellPrice' => 27],
+            ['cost' => 8, 'revenue'=>18 , 'sellPrice' => 28],
+            ['cost' => 9, 'revenue'=>19 , 'sellPrice' => 29],
+            ['cost' => 10, 'revenue'=>20 , 'sellPrice' => 30],
+            ['cost' => 11, 'revenue'=>21 , 'sellPrice' => 31],
+        ];
     }
+
+
+    public function getGroup($group)
+    {
+
+        foreach ($this->products as $key => $product)
+        {
+            $this->sortProduct[] = $product[$group];
+        }
+        return $this;
+    }
+
+
+    public function getchunk($catNum)
+    {
+        $this->chunkProduct = array_chunk($this->sortProduct,$catNum);
+        return $this;
+    }
+
+    public function getSum()
+    {
+
+        foreach ($this->chunkProduct as $chunKey => $sumProduct)
+        {
+            $this->sumProduct[] =   array_sum($sumProduct);
+        }
+        
+        return $this->sumProduct;
+    }
+
+
 }
 
