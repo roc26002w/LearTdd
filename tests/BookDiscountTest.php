@@ -21,14 +21,15 @@ class BooksDiscountTest extends PHPUnit_Framework_TestCase
     public function test_Buy_One_Book_Get_100()
     {
         //Arrange
-        $except = 100;
-        //Act
         $this->booksDiscountCalculator->addBook(new Book('Harry Potter1',1));
+        $expected = 100;
+
+        //Act
         $this->booksDiscountCalculator->calculator();
         $act    =   $this->booksDiscountCalculator->getTotal();
 
         //Assert
-        $this->assertEquals($except,$act);
+        $this->assertEquals($expected,$act);
 
     }
 
@@ -38,16 +39,17 @@ class BooksDiscountTest extends PHPUnit_Framework_TestCase
     public function test_Buy_Two_Book_Get_190()
     {
         //Arrange
-        $except = 190;
-
-        //Act
         $this->booksDiscountCalculator->addBook(new Book('Harry Potter1',1));
         $this->booksDiscountCalculator->addBook(new Book('Harry Potter2',1));
+
+        $expected = 190;
+
+        //Act
         $this->booksDiscountCalculator->calculator();
         $act    =   $this->booksDiscountCalculator->getTotal();
 
         //Assert
-        $this->assertEquals($except,$act);
+        $this->assertEquals($expected,$act);
 
 
     }
@@ -59,17 +61,17 @@ class BooksDiscountTest extends PHPUnit_Framework_TestCase
     {
 
         //Arrange
-        $except = 270;
-
-        //Act
         $this->booksDiscountCalculator->addBook(new Book('Harry Potter1',1));
         $this->booksDiscountCalculator->addBook(new Book('Harry Potter2',1));
         $this->booksDiscountCalculator->addBook(new Book('Harry Potter3',1));
+        $expected = 270;
+
+        //Act
         $this->booksDiscountCalculator->calculator();
         $act    =   $this->booksDiscountCalculator->getTotal();
 
         //Assert
-        $this->assertEquals($except,$act);
+        $this->assertEquals($expected,$act);
     }
 
     /**
@@ -78,18 +80,18 @@ class BooksDiscountTest extends PHPUnit_Framework_TestCase
     public function test_Buy_Four_Book_Get_320()
     {
         //Arrange
-        $except = 320;
-
-        //Act
         $this->booksDiscountCalculator->addBook(new Book('Harry Potter1',1));
         $this->booksDiscountCalculator->addBook(new Book('Harry Potter2',1));
         $this->booksDiscountCalculator->addBook(new Book('Harry Potter3',1));
         $this->booksDiscountCalculator->addBook(new Book('Harry Potter4',1));
+        $expected = 320;
+
+        //Act
         $this->booksDiscountCalculator->calculator();
         $act    =   $this->booksDiscountCalculator->getTotal();
 
         //Assert
-        $this->assertEquals($except,$act);
+        $this->assertEquals($expected,$act);
 
     }
 
@@ -99,19 +101,19 @@ class BooksDiscountTest extends PHPUnit_Framework_TestCase
     public function test_Buy_All_Potter_BookGet_375()
     {
         //Arrange
-        $except = 375;
-
-        //Act
         $this->booksDiscountCalculator->addBook(new Book('Harry Potter1',1));
         $this->booksDiscountCalculator->addBook(new Book('Harry Potter2',1));
         $this->booksDiscountCalculator->addBook(new Book('Harry Potter3',1));
         $this->booksDiscountCalculator->addBook(new Book('Harry Potter4',1));
         $this->booksDiscountCalculator->addBook(new Book('Harry Potter5',1));
+        $expected = 375;
+
+        //Act
         $this->booksDiscountCalculator->calculator();
         $act    =   $this->booksDiscountCalculator->getTotal();
 
         //Assert
-        $this->assertEquals($except,$act);
+        $this->assertEquals($expected,$act);
         
     }
 
@@ -121,17 +123,17 @@ class BooksDiscountTest extends PHPUnit_Framework_TestCase
     public function test_Buy_v1Book_one_v2Book_one_v3Book_three_Get_370()
     {
         //Arrange
-        $except = 370;
-
-        //Act
         $this->booksDiscountCalculator->addBook(new Book('Harry Potter1',1));
         $this->booksDiscountCalculator->addBook(new Book('Harry Potter2',1));
         $this->booksDiscountCalculator->addBook(new Book('Harry Potter3',2));
+        $expected = 370;
+
+        //Act
         $this->booksDiscountCalculator->calculator();
         $act    =   $this->booksDiscountCalculator->getTotal();
 
         //Assert
-        $this->assertEquals($except,$act);
+        $this->assertEquals($expected,$act);
 
     }
 
@@ -141,17 +143,17 @@ class BooksDiscountTest extends PHPUnit_Framework_TestCase
     public function test_Buy_v1Book_one_v2Book_two_v3Book_two_Get_460()
     {
         //Arrange
-        $except = 460;
-
-        //Act
         $this->booksDiscountCalculator->addBook(new Book('Harry Potter1',1));
         $this->booksDiscountCalculator->addBook(new Book('Harry Potter2',2));
         $this->booksDiscountCalculator->addBook(new Book('Harry Potter3',2));
+        $expected = 460;
+
+        //Act
         $this->booksDiscountCalculator->calculator();
         $act    =   $this->booksDiscountCalculator->getTotal();
 
         //Assert
-        $this->assertEquals($except,$act);
+        $this->assertEquals($expected,$act);
 
     }
 
@@ -162,19 +164,19 @@ class BooksDiscountTest extends PHPUnit_Framework_TestCase
     public function test_Buy_v1Book_one_v2Book_three_v3Book_three_v4Book_one_v5Book_one_Get_460()
     {
         //Arrange
-        $except = 755;
-
-        //Act
         $this->booksDiscountCalculator->addBook(new Book('Harry Potter1',1));
         $this->booksDiscountCalculator->addBook(new Book('Harry Potter2',3));
         $this->booksDiscountCalculator->addBook(new Book('Harry Potter3',3));
         $this->booksDiscountCalculator->addBook(new Book('Harry Potter4',1));
         $this->booksDiscountCalculator->addBook(new Book('Harry Potter5',1));
+        $expected = 755;
+
+        //Act
         $this->booksDiscountCalculator->calculator();
         $act    =   $this->booksDiscountCalculator->getTotal();
 
         //Assert
-        $this->assertEquals($except,$act);
+        $this->assertEquals($expected,$act);
 
     }
 

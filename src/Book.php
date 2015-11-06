@@ -7,7 +7,7 @@ namespace No2;
 class Book
 {
 
-    protected $discountBooks;
+    protected $shippingBooks;
     protected $price;
     private $name;
     private $count;
@@ -26,9 +26,9 @@ class Book
     public function getPrice()
     {
         $this->price    =   0;
-        $discountBooks = $this->discountBooks();
-        if(array_key_exists($this->name,$discountBooks)){
-            $this->price = $discountBooks[$this->name];
+        $shippingBooks = $this->ShippingBooks();
+        if(array_key_exists($this->name,$shippingBooks)){
+            $this->price = $shippingBooks[$this->name];
         }
 
         return $this->price;
@@ -50,7 +50,7 @@ class Book
     /**
      * @return array
      */
-    protected function discountBooks()
+    protected function ShippingBooks()
     {
         return [
             'Harry Potter1' => 100,
