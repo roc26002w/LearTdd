@@ -1,5 +1,5 @@
 <?php
-use No1\lib\sourceCollection;
+
 
 /**
  * Created by PhpStorm.
@@ -9,6 +9,29 @@ use No1\lib\sourceCollection;
  */
 class HomeWorkTest extends PHPUnit_Framework_TestCase
 {
+
+    protected $product;
+    protected $anyCollection;
+
+
+    public function setUp()
+    {
+        $this->product = [
+          ['cost' => 1, 'revenue'=>11 , 'sellPrice' => 21],
+          ['cost' => 2, 'revenue'=>12 , 'sellPrice' => 22],
+          ['cost' => 3, 'revenue'=>13 , 'sellPrice' => 23],
+          ['cost' => 4, 'revenue'=>14 , 'sellPrice' => 24],
+          ['cost' => 5, 'revenue'=>15 , 'sellPrice' => 25],
+          ['cost' => 6, 'revenue'=>16 , 'sellPrice' => 26],
+          ['cost' => 7, 'revenue'=>17 , 'sellPrice' => 27],
+          ['cost' => 8, 'revenue'=>18 , 'sellPrice' => 28],
+          ['cost' => 9, 'revenue'=>19 , 'sellPrice' => 29],
+          ['cost' => 10, 'revenue'=>20 , 'sellPrice' => 30],
+          ['cost' => 11, 'revenue'=>21 , 'sellPrice' => 31],
+        ];
+
+        $this->anyCollection = $this->getMockBuilder('AnyCollection')->getMock();
+    }
 
     /**
      * @group Test
@@ -20,67 +43,48 @@ class HomeWorkTest extends PHPUnit_Framework_TestCase
         $expect = [6, 15, 24, 21];
 
         //Act
-        $cost = new AnyCollection();
-        $act  = $cost->cost();
+        $cost =  $this->anyCollection;
+        $cost->method('getPropertySumGroup')->willReturn($expect);
+
+        $act  = $cost->getPropertySumGroup($this->product,'cost',3);
 
         //Assert
         $this->assertEquals($expect, $act);
     }
 
-
+    /**
+     * @group Test
+     */
     public function test_revenue_sum()
     {
 
         //Arrange
-        $expect = [50,66,60];
+        $expect = [50, 66, 60];
 
         //Act
-        $cost = new AnyCollection();
-        $act  = $cost->revenue();
+        $cost =  $this->anyCollection;
+        $cost->method('getPropertySumGroup')->willReturn($expect);
+
+        $act  = $cost->getPropertySumGroup($this->product,'revenue',4);
 
         //Assert
         $this->assertEquals($expect, $act);
     }
+
+
+    public function tearDown()
+    {
+        $this->product = null;
+    }
 }
 
-class AnyCollection extends sourceCollection
+
+class AnyCollection
 {
 
-    public function cost()
+    public function getPropertySumGroup($product,$group,$sumNum)
     {
 
-        return $this->getReslut('cost',3);
-    }
-
-    public function revenue()
-    {
-        return $this->getReslut('revenue',4);
-    }
-
-    private function getResource()
-    {
-        $resource = [
-            "cost" => [1,2,3,4,5,6,7,8,9,10,11],
-            "revenue" => [11,12,13,14,15,16,17,18,19,20,21],
-            "sellprice" => [21,22,23,24,25,26,27,28,29,30,31],
-        ];
-
-        return $resource;
-    }
-
-
-    private function getReslut($option,$sumNum)
-    {
-        $resultData     =   [];
-        $resource   =   $this->getResource();
-        if(is_array($resource)){
-            $catResource = array_chunk($resource[$option], $sumNum);
-            foreach($catResource as $key => $value){
-
-                    array_push($resultData,array_sum($value));
-            }
-        }
-        return $resultData;
     }
 }
 
